@@ -14,11 +14,23 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h3>Film info</h3>
+	<h3 class="text-center">Film info</h3>
 	<ul>
-		<li>${film.title }</li>
-		<li>${film.description }</li>
-		<li>${film.releaseYear }</li>
+		<li>Title: ${film.title }</li>
+		<li>Description: ${film.description }</li>
+		<li>Release year: ${film.releaseYear }</li>
+		<li>Rental duration: ${film.rentalDuration }</li>
+		<li>Rental rate: $${film.rentalRate }</li>
+		<li>Length: ${film.length }</li>
+		<li>Replacement cost: $${film.replacementCost }</li>
+		<li>Rating: ${film.rating }</li>
+		<li>Special features: ${film.specialFeatures }</li>
+		<li>Language: ${film.language }</li>
+		<li>Cast:<ol>
+			<c:forEach var="actor" items="${film.actors }">
+				<li> Name: ${actor.firstName } ${actor.lastName } </li>
+			</c:forEach>
+		</ol></li>
 	</ul>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

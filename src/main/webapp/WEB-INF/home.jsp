@@ -12,16 +12,16 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h1>Welcome to MVC Film Site</h1>
-
-	<form action="GetFilmDataById.do" method="GET">
-		Film ID: <input type="text" name="id" /> <input type="submit"
-			value="Get Film By Id" />
+	<h1 class="text-center">Welcome to MVC Film Site</h1>
+	<br>
+	<form class="text-center" action="GetFilmDataById.do" method="GET">
+		Film ID Search: <input type="text" name="id" /> 
+						<input class="btn btn-primary" type="submit" value="Get Film By Id" />
 	</form>
-
-	<form action="GetFilmDataByKeyword.do" method="GET">
-		Keyword Search: <input type="text" name="keyword" /> <input
-			type="submit" value="Get Film By Keyword" />
+	<br>
+	<form class="text-center" action="GetFilmDataByKeyword.do" method="GET">
+		Keyword Search: <input type="text" name="keyword" /> 
+						<input class="btn btn-primary" type="submit" value="Get Film By Keyword" />
 	</form>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

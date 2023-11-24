@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
 
 public class FilmDaoJdbcImpl implements FilmDAO {
@@ -32,8 +33,10 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next())
+			if(rs.next()) {
 				film = mapFilmData(rs);
+				film.setActors(findActorsByFilmId(filmId));
+			}
 			rs.close();
 			stmt.close();
 			conn.close();
@@ -56,6 +59,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			
 			while(rs.next()) {
 				Film film = mapFilmData(rs);
+				film.setActors(findActorsByFilmId(film.getId()));
 				films.add(film);
 			}
 			
@@ -80,11 +84,57 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		double replacementCost = filmResult.getDouble("replacement_cost");
 		String rating = filmResult.getString("rating");
 		String specialFeatures = filmResult.getString("special_features");
-		String language = "";
+		String language = getLanguageName(languageId);
 		
 		return new Film(id, title, description, releaseYear, languageId, rentalDuration, rentalRate, length,
 				replacementCost, rating, specialFeatures, language);
 
+	}
+	
+	private List<Actor> findActorsByFilmId(int filmId){
+		List<Actor> actors = new ArrayList<>();
+		try {
+			Connection conn = DriverManager.getConnection(URL, USER, PWD);
+			String sql = "SELECT * FROM actor JOIN film_actor ON actor.id = film_actor.actor_id WHERE film_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+
+				Actor actor = new Actor(id, firstName, lastName);
+				actors.add(actor);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return actors;
+	}
+	
+	private String getLanguageName(int langId) {
+		String language = null;
+		try {
+		Connection conn = DriverManager.getConnection(URL, USER, PWD);
+		String sql = "SELECT name FROM language WHERE id=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, langId);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			language =rs.getString("name");
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return language;
 	}
 
 }

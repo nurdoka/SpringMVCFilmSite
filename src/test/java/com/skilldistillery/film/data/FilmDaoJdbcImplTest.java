@@ -28,7 +28,7 @@ class FilmDaoJdbcImplTest {
 	 void test_findById_returns_film() {
 	 	Film film = dao.findById(1);
 	 	assertNotNull(film);
-	// 	assertEquals("ACADEMY DINOSAUR", film.getTitle());
+	 	assertEquals("ACADEMY DINOSAUR", film.getTitle());
 	 }
 	 
 	 @Test
