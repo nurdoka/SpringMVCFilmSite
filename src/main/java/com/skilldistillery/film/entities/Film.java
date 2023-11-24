@@ -36,10 +36,9 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
-		this.language = language;
 	}
 	public String getCategory() {
-		return language;
+		return category;
 	}
 	
 	public void setCategory(String category) {
