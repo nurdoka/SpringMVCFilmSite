@@ -26,6 +26,7 @@
 		<li>Rating: ${film.rating }</li>
 		<li>Special features: ${film.specialFeatures }</li>
 		<li>Language: ${film.language }</li>
+		<li>Category: ${film.category }</li>
 		<li>Cast:<ol>
 			<c:forEach var="actor" items="${film.actors }">
 				<li> Name: ${actor.firstName } ${actor.lastName } </li>
@@ -38,17 +39,3 @@
 		crossorigin="anonymous"></script>
 </body>
 </html>
-<!--
-	private int id;
-	private String title;
-	private String description;
-	private Integer releaseYear;
-	private int languageId;
-	private int rentalDuration;
-	private double rentalRate;
-	private Integer length;
-	private double replacementCost;
-	private String rating;
-	private String specialFeatures;
-	private String language; 
--->

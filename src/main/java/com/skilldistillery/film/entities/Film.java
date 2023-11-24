@@ -16,6 +16,7 @@ public class Film {
 	private String rating;
 	private String specialFeatures;
 	private String language;
+	private String category;
 	private List<Actor> actors;
 	
 	public Film() {
@@ -23,7 +24,7 @@ public class Film {
 	}
 
 	public Film(int id, String title, String description, Integer releaseYear, int languageId, int rentalDuration,
-			double rentalRate, Integer length, double replacementCost, String rating, String specialFeatures, String language) {
+			double rentalRate, Integer length, double replacementCost, String rating, String specialFeatures) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -36,6 +37,13 @@ public class Film {
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
 		this.language = language;
+	}
+	public String getCategory() {
+		return language;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getLanguage() {
 		return language;
@@ -143,8 +151,8 @@ public class Film {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(actors, description, id, languageId, length, rating, releaseYear, rentalDuration,
-				rentalRate, replacementCost, specialFeatures, title);
+		return Objects.hash(actors, category, description, id, language, languageId, length, rating, releaseYear,
+				rentalDuration, rentalRate, replacementCost, specialFeatures, title);
 	}
 
 	@Override
@@ -156,10 +164,11 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-		return Objects.equals(actors, other.actors) && Objects.equals(description, other.description) && id == other.id
-				&& languageId == other.languageId && Objects.equals(length, other.length)
-				&& Objects.equals(rating, other.rating) && Objects.equals(releaseYear, other.releaseYear)
-				&& rentalDuration == other.rentalDuration
+		return Objects.equals(actors, other.actors) && Objects.equals(category, other.category)
+				&& Objects.equals(description, other.description) && id == other.id
+				&& Objects.equals(language, other.language) && languageId == other.languageId
+				&& Objects.equals(length, other.length) && Objects.equals(rating, other.rating)
+				&& Objects.equals(releaseYear, other.releaseYear) && rentalDuration == other.rentalDuration
 				&& Double.doubleToLongBits(rentalRate) == Double.doubleToLongBits(other.rentalRate)
 				&& Double.doubleToLongBits(replacementCost) == Double.doubleToLongBits(other.replacementCost)
 				&& Objects.equals(specialFeatures, other.specialFeatures) && Objects.equals(title, other.title);
