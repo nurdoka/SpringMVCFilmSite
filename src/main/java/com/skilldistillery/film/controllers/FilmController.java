@@ -35,4 +35,12 @@ public class FilmController {
 		mv.addObject("films", filmDao.searchByKeyword(n));
 		return mv;
 	}
+	
+	@RequestMapping(path = "ListAllFilms.do", method = RequestMethod.GET)
+	public ModelAndView getAllFilms() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/films.jsp");
+		mv.addObject("films", filmDao.getAllFilms());
+		return mv;
+	}
 }

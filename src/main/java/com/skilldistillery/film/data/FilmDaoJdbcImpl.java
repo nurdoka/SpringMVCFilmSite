@@ -72,6 +72,30 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		return films;
 	}
 
+	@Override
+	public List<Film> getAllFilms() {
+		List<Film> films = new ArrayList<>();
+		try {
+			Connection conn = DriverManager.getConnection(URL, USER, PWD);
+			String sql = "SELECT * FROM film";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Film film = mapFilmData(rs);
+				
+				films.add(film);
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return films;
+	}
+
 	private Film mapFilmData(ResultSet filmResult) throws SQLException {
 		int id = filmResult.getInt("id");
 		String title = filmResult.getString("title");
