@@ -36,13 +36,13 @@
 		</div>
 	</nav>
 
-	<h3>LIST OF FILMS FOUND</h3>
-
+	<h3 class="text-center">LIST OF FILMS FOUND</h3>
+	<div class="container text-center mt-5">
 	<c:choose>
 		<c:when test="${! empty films}">
-			<ul>
+			<ul class="list-group mx-auto" style="max-width: 400px;">
 				<c:forEach var="film" items="${films }">
-					<li><a href="GetFilmDataById.do?id=${film.id }">Title
+					<li class="list-group-item"><a href="GetFilmDataById.do?id=${film.id }">Title
 							${film.title}</a></li>
 				</c:forEach>
 
@@ -54,7 +54,7 @@
 	</c:choose>
 
 	<button class="btn btn-primary" onclick="goBack()">Go Back</button>
-
+	</div>
 
 	<script>
 		function goBack() {
